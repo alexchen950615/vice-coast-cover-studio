@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Coast — Cover Studio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">VC</span>
+    <span class="brand-name">VICE COAST</span>
+    <span class="brand-sub">Cover Studio</span>
+  </div>
+  <div class="top-actions">
+    <label class="size-picker" for="exportSize">Export size</label>
+    <select id="exportSize">
+      <option value="1080x1080">1080 × 1080 · Square</option>
+      <option value="1080x1350" selected>1080 × 1350 · Portrait</option>
+      <option value="1920x1080">1920 × 1080 · Wide</option>
+    </select>
+    <button id="exportAllBtn" class="btn ghost" type="button">All 3 sizes</button>
+    <button id="exportBtn" class="btn primary" type="button">Export PNG ↓</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <section class="stage-wrap">
+    <div class="stage-toolbar">
+      <span id="layoutName" class="stage-label">Hero + Three</span>
+      <span id="photoHint" class="stage-hint">Click a panel, then pick a photo below — drag to move, scroll to zoom</span>
+    </div>
+    <div class="stage">
+      <canvas id="coverCanvas" width="1080" height="1350"></canvas>
+      <div id="coverOnly" class="cover-only" hidden></div>
+    </div>
+    <div class="filmstrip" id="filmstrip" aria-label="Photos"></div>
+    <div class="add-photos">
+      <label class="btn ghost" for="photoInput">＋ Add your photos</label>
+      <input id="photoInput" type="file" accept="image/*" multiple hidden>
+      <button id="demoBtn" class="btn ghost" type="button">Load demo scenes</button>
+      <button id="shuffleBtn" class="btn ghost" type="button">Shuffle panels</button>
+      <span class="privacy-note">Photos never leave this machine — everything runs offline in your browser.</span>
+    </div>
+  </section>
+
+  <aside class="controls">
+    <section class="panel" id="layoutPanel">
+      <h2>1 · Layout</h2>
+      <div class="layout-grid" id="layoutGrid"></div>
+    </section>
+
+    <section class="panel" id="photoPanel">
+      <h2>2 · Selected panel</h2>
+      <div class="row">
+        <label for="panelPhoto">Photo</label>
+        <select id="panelPhoto"></select>
+      </div>
+      <div class="row">
+        <label for="panelZoom">Zoom <span id="zoomVal">100%</span></label>
+        <input id="panelZoom" type="range" min="100" max="300" value="100">
+      </div>
+      <div class="row">
+        <label for="panelShift">Shift</label>
+        <input id="panelShift" type="range" min="-50" max="50" value="0">
+      </div>
+      <p class="hint">Tip: drag directly on the cover to pan the selected panel.</p>
+    </section>
+
+    <section class="panel" id="gradePanel">
+      <h2>3 · Sunset grade</h2>
+      <div class="swatches" id="gradeSwatches"></div>
+      <div class="row">
+        <label for="gradeStrength">Grade strength <span id="gradeVal">80%</span></label>
+        <input id="gradeStrength" type="range" min="0" max="100" value="80">
+      </div>
+      <div class="row">
+        <label for="warmth">Warmth <span id="warmthVal">+15</span></label>
+        <input id="warmth" type="range" min="-40" max="60" value="15">
+      </div>
+    </section>
+
+    <section class="panel" id="captionPanel">
+      <h2>4 · Caption</h2>
+      <div class="row">
+        <label for="titleInput">Title</label>
+        <input id="titleInput" type="text" value="VICE COAST" maxlength="24" spellcheck="false">
+      </div>
+      <div class="row">
+        <label for="subtitleInput">Subtitle</label>
+        <input id="subtitleInput" type="text" value="sunset heist · vice city nights" maxlength="48" spellcheck="false">
+      </div>
+      <div class="row">
+        <label for="titleStyle">Title style</label>
+        <select id="titleStyle">
+          <option value="sunset">Sunset gradient</option>
+          <option value="neon">Neon outline</option>
+          <option value="white">White block</option>
+          <option value="gold">Gold foil</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="titleSize">Title size <span id="titleSizeVal">100%</span></label>
+        <input id="titleSize" type="range" min="60" max="150" value="100">
+      </div>
+    </section>
+
+    <section class="panel" id="fxPanel">
+      <h2>5 · Poster finish</h2>
+      <label class="check"><input id="fxGrain" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="fxVignette" type="checkbox" checked> Vignette</label>
+      <label class="check"><input id="fxHalftone" type="checkbox"> Halftone dots on title</label>
+      <label class="check"><input id="fxFrame" type="checkbox" checked> White poster frame</label>
+      <label class="check"><input id="fxBadge" type="checkbox" checked> “Vice Coast” corner badge</label>
+      <div class="row">
+        <label for="fxStars">Heat meter <span id="starsVal">★★★★☆</span></label>
+        <input id="fxStars" type="range" min="0" max="5" step="1" value="4">
+      </div>
+    </section>
+
+    <section class="panel" id="aboutPanel">
+      <h2>About this cover</h2>
+      <p class="hint">Original art, drawn in your browser. No Rockstar logo, artwork or
+      fonts — the lettering is your system’s heavy sans, the photos are yours or the
+      built-in demo scenes painted by this app itself.</p>
+      <button id="randomBtn" class="btn ghost" type="button">Surprise me — random cover</button>
+    </section>
+  </aside>
+</main>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
